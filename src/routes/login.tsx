@@ -37,11 +37,11 @@ function Login() {
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !password) return toast.error("Enter your email and password");
+    if (!email || !password) { toast.error("Enter your email and password"); return; }
     setBusy(true);
     const { error } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     if (!remember) sessionStorage.setItem("resumeai-session-only", "1");
     navigate({ to: "/dashboard" });
   };

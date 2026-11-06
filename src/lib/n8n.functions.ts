@@ -19,7 +19,7 @@ export const generateResume = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => resumeSchema.parse(input))
   .handler(async ({ data, context }) => {
     const { supabase, userId } = context;
-    const webhook = process.env.N8N_WEBHOOK_URL || DEFAULT_WEBHOOK;
+    const webhook = process.env["N8N_WEBHOOK_URL"] || DEFAULT_WEBHOOK;
     const title = `${data.Name} – Resume`;
 
     let res: Response;
@@ -51,8 +51,8 @@ export const generateResume = createServerFn({ method: "POST" })
     } else if (ct.includes("json")) {
       const json = (await res.json()) as Record<string, unknown>;
       const j = Array.isArray(json) ? (json[0] as Record<string, unknown>) : json;
-      if (emailStatus === "unconfirmed") emailStatus = readEmailStatus(j?.emailSent ?? j?.emailStatus);
-      const url = (j?.pdfUrl ?? j?.pdf_url ?? j?.url) as string | undefined;
+      if (emailStatus === "unconfirmed") emailStatus = readEmailStatus(j?.["emailSent"] ?? j?.["emailStatus"]);
+      const url = (j?.["pdfUrl"] ?? j?.["pdf_url"] ?? j?.["url"]) as string | undefined;
       if (url && /^https?:\/\//.test(url)) {
         const p = await fetch(url);
         if (p.ok) pdf = await p.arrayBuffer();

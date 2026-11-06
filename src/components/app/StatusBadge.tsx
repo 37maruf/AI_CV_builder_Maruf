@@ -14,7 +14,7 @@ const labels: Record<string, string> = {
 export function StatusBadge({ status, kind }: { status: string; kind?: "email" | "pdf" }) {
   const label = kind === "email" && status === "failed" ? "Email failed" : kind === "pdf" && status === "failed" ? "PDF failed" : labels[status] ?? status;
   return (
-    <span className={cn("inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium", styles[status] ?? styles.unconfirmed)}>
+    <span className={cn("inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium", styles[status] ?? styles["unconfirmed"])}>
       {label}
     </span>
   );

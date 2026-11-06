@@ -100,9 +100,9 @@ export const resumeSchema = z.object({
 /** Validate only the fields of one step; returns field → message. */
 export function validateStep(step: number, data: ResumeData): Partial<Record<FieldName, string>> {
   const errors: Partial<Record<FieldName, string>> = {};
-  for (const f of STEPS[step].fields) {
+  for (const f of STEPS[step]?.fields ?? []) {
     const r = resumeSchema.shape[f.name].safeParse(data[f.name]);
-    if (!r.success) errors[f.name] = r.error.issues[0]?.message;
+    if (!r.success) errors[f.name] = r.error.issues[0]?.message ?? "Invalid";
   }
   return errors;
 }

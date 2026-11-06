@@ -36,10 +36,10 @@ function Register() {
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!f.name.trim()) return toast.error("Enter your full name");
-    if (!/^\S+@\S+\.\S+$/.test(f.email)) return toast.error("Enter a valid email");
-    if (!rules.every((r) => r.test(f.password))) return toast.error("Password doesn't meet the requirements");
-    if (f.password !== f.confirm) return toast.error("Passwords don't match");
+    if (!f.name.trim()) { toast.error("Enter your full name"); return; }
+    if (!/^\S+@\S+\.\S+$/.test(f.email)) { toast.error("Enter a valid email"); return; }
+    if (!rules.every((r) => r.test(f.password))) { toast.error("Password doesn't meet the requirements"); return; }
+    if (f.password !== f.confirm) { toast.error("Passwords don't match"); return; }
     setBusy(true);
     const { error } = await supabase.auth.signUp({
       email: f.email.trim(),
@@ -47,7 +47,7 @@ function Register() {
       options: { emailRedirectTo: window.location.origin + "/dashboard", data: { full_name: f.name.trim() } },
     });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     setSent(true);
   };
 

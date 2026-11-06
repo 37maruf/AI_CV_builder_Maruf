@@ -21,6 +21,8 @@ import { Route as TermsRouteImport } from './routes/terms'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedMyResumesRouteImport } from './routes/_authenticated/my-resumes'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
+import { Route as AuthenticatedResumeBuilderRouteImport } from './routes/_authenticated/resume-builder'
+import { Route as AuthenticatedResumeResultRouteImport } from './routes/_authenticated/resume-result'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -81,6 +83,18 @@ const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
   path: '/profile',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedResumeBuilderRoute =
+  AuthenticatedResumeBuilderRouteImport.update({
+    id: '/resume-builder',
+    path: '/resume-builder',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedResumeResultRoute =
+  AuthenticatedResumeResultRouteImport.update({
+    id: '/resume-result',
+    path: '/resume-result',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -94,6 +108,8 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/my-resumes': typeof AuthenticatedMyResumesRoute
   '/profile': typeof AuthenticatedProfileRoute
+  '/resume-builder': typeof AuthenticatedResumeBuilderRoute
+  '/resume-result': typeof AuthenticatedResumeResultRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -107,6 +123,8 @@ export interface FileRoutesByTo {
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/my-resumes': typeof AuthenticatedMyResumesRoute
   '/profile': typeof AuthenticatedProfileRoute
+  '/resume-builder': typeof AuthenticatedResumeBuilderRoute
+  '/resume-result': typeof AuthenticatedResumeResultRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -122,6 +140,8 @@ export interface FileRoutesById {
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/my-resumes': typeof AuthenticatedMyResumesRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
+  '/_authenticated/resume-builder': typeof AuthenticatedResumeBuilderRoute
+  '/_authenticated/resume-result': typeof AuthenticatedResumeResultRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -137,6 +157,8 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/my-resumes'
     | '/profile'
+    | '/resume-builder'
+    | '/resume-result'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -150,6 +172,8 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/my-resumes'
     | '/profile'
+    | '/resume-builder'
+    | '/resume-result'
   id:
     | '__root__'
     | '/'
@@ -164,6 +188,8 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard'
     | '/_authenticated/my-resumes'
     | '/_authenticated/profile'
+    | '/_authenticated/resume-builder'
+    | '/_authenticated/resume-result'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -264,6 +290,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedProfileRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/resume-builder': {
+      id: '/_authenticated/resume-builder'
+      path: '/resume-builder'
+      fullPath: '/resume-builder'
+      preLoaderRoute: typeof AuthenticatedResumeBuilderRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/resume-result': {
+      id: '/_authenticated/resume-result'
+      path: '/resume-result'
+      fullPath: '/resume-result'
+      preLoaderRoute: typeof AuthenticatedResumeResultRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
@@ -271,12 +311,16 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedMyResumesRoute: typeof AuthenticatedMyResumesRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
+  AuthenticatedResumeBuilderRoute: typeof AuthenticatedResumeBuilderRoute
+  AuthenticatedResumeResultRoute: typeof AuthenticatedResumeResultRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedMyResumesRoute: AuthenticatedMyResumesRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
+  AuthenticatedResumeBuilderRoute: AuthenticatedResumeBuilderRoute,
+  AuthenticatedResumeResultRoute: AuthenticatedResumeResultRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =

@@ -24,5 +24,5 @@ export function useAuth() {
 export function displayName(user: User | null) {
   if (!user) return "";
   const m = user.user_metadata ?? {};
-  return (m.full_name as string) || (m.name as string) || user.email?.split("@")[0] || "";
+  return (m["full_name"] as string) || (m["name"] as string) || user.email?.split("@")[0] || "";
 }
