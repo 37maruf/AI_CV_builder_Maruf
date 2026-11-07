@@ -4,7 +4,7 @@ import { resumeSchema } from "./resume-fields";
 
 // Override with the N8N_WEBHOOK_URL secret; this default is the user's workflow webhook.
 const DEFAULT_WEBHOOK =
-  "https://maruf37.app.n8n.cloud/webhook-test/9591fdd9-f264-4a94-a1a1-932fd038f504";
+  "https://maruf37.app.n8n.cloud/webhook-test/resume-builder";
 
 type EmailStatus = "sent" | "failed" | "unconfirmed";
 
